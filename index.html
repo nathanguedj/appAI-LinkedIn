@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Générateur de Prompt Vidéo JSON - Veo 3</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    background: #f9f9f9;
+    box-sizing: border-box;
+  }
+
+  .logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .responsive-logo {
+    max-width: 80%;
+    height: auto;
+    max-height: 100px;
+    width: auto;
+    display: inline-block;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  #dropzone {
+    border: 2px dashed #ccc;
+    padding: 3rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    word-wrap: break-word;
+  }
+  #dropzone.hover {
+    border-color: #333;
+    background: #f0f0f0;
+  }
+
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    color: #444;
+    margin-top: 10px;
+  }
+
+  #descInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  .buttons-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  button {
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 250px;
+    transition: background-color 0.2s ease;
+  }
+  button:hover {
+    background-color: #005bb5;
+  }
+
+  #spinner {
+    display: none;
+    margin: 15px auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  #jsonPrompt {
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    max-width: 100%;
+    word-break: break-all;
+  }
+
+  .guide {
+    background: #eef7ff;
+    border-left: 4px solid #0073e6;
+    padding: 15px 20px;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #004a99;
+    border-radius: 6px;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 600px) {
+    button {
+      font-size: 1.1rem;
+      max-width: 180px;
+    }
+    .buttons-container {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .responsive-logo {
+      max-width: 95%;
+      max-height: 80px;
+    }
+    #dropzone {
+      padding: 2rem 0.5rem;
+      font-size: 0.9rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+    .guide {
+      font-size: 0.85rem;
+      padding: 12px 15px;
+    }
+    #jsonPrompt {
+      font-size: 0.88rem;
+      padding: 8px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="logo-container">
+  <img src="https://cdn.prod.website-files.com/62148d3ac62180149120a39c/624030bf8b99c52ab8a0f792_Test%20Utopia%20Studio.png" alt="Logo Utopia Studio" class="responsive-logo">
+</div>
+
+<h1>Générateur de Prompt Vidéo - JSON Veo 3</h1>
+
+<div id="dropzone">Déposez ici la photo de votre produit ou cliquez pour choisir</div>
+<input type="file" id="fileInput" accept="image/*" style="display:none" />
+
+<label for="descInput">Décrivez votre produit :</label>
+<input type="text" id="descInput" placeholder="Ex : mug blanc brillant sur table bois, sneakers édition limitée, etc." />
+
+<div class="buttons-container">
+  <button id="generatePrompt" disabled>Générer le prompt JSON</button>
+  <button id="copyPrompt" disabled>Copier le JSON</button>
+</div>
+
+<div id="spinner">Prêt à générer votre JSON !</div>
+
+<pre id="jsonPrompt">{
+  "prompt": "",
+  "visual_style": "",
+  "product_name": "",
+  "mood": "",
+  "camera": "",
+  "music": ""
+}</pre>
+
+<div class="guide">
+  <strong>Comment utiliser ce prompt dans Veo 3 ?</strong>
+  <p>1. Copiez ce prompt JSON.</p>
+  <p>2. Ouvrez Veo 3 et commencez un nouveau projet vidéo.</p>
+  <p>3. Importez la photo du produit utilisée ici.</p>
+  <p>4. Collez le JSON dans la section texte ou prompt de Veo 3.</p>
+  <p>5. Lancez la génération vidéo et admirez le résultat !</p>
+</div>
+
+<div class="guide" style="margin-top:30px;">
+  <strong>🛠 Outils IA compatibles (photo ➔ vidéo, texte ➔ vidéo, etc.)</strong>
+  <ul>
+    <li><b>Photo to Video :</b>
+      <ul>
+        <li><b>Veo 3</b> (Google) — Génère des vidéos spectaculaires à partir d’image <u>et</u> prompt</li>
+        <li><b>Runway Gen-3</b> — Vidéo réaliste à partir d’une photo importée et d’un prompt</li>
+        <li><b>Pika Labs</b> — Génération vidéo sur la base d’une image téléchargée</li>
+        <li><b>Kaiber</b> — Animation vidéo IA à partir de photo</li>
+        <li><b>PixVerse</b>, <b>Haiper</b>, <b>Deevid</b>…</li>
+      </ul>
+    </li>
+    <li><b>Text to Video :</b>
+      <ul>
+        <li><b>Sora (OpenAI)</b> — Génère une vidéo uniquement à partir d’un prompt texte</li>
+        <li><b>Genmo</b> — Vidéo IA avec instructions textuelles</li>
+        <li><b>Luma Dream Machine</b> — Vidéo impressionnante à partir d’un prompt texte</li>
+        <li><b>Pika Labs</b>, <b>Runway Gen-3</b> (accepte aussi prompt seul)</li>
+      </ul>
+    </li>
+  </ul>
+  <div style="margin-top:10px;color:#ba3d00;">
+    <strong>Important :</strong> Pour les générateurs vidéo IA “photo + texte”, <u>importez la photo utilisée ici <strong>en même temps que le prompt</strong></u> dans l’interface du service (Veo 3, Runway, Pika Labs…) pour un rendu fidèle à votre visuel produit !
+  </div>
+</div>
+
+<script>
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const generateBtn = document.getElementById('generatePrompt');
+const copyBtn = document.getElementById('copyPrompt');
+const spinner = document.getElementById('spinner');
+const descInput = document.getElementById('descInput');
+const jsonPrompt = document.getElementById('jsonPrompt');
+
+let uploadedImage = null;
+
+// --- Gestion de la dropzone ---
+dropzone.addEventListener('click', () => fileInput.click());
+
+dropzone.addEventListener('dragover', e => {
+  e.preventDefault();
+  dropzone.classList.add('hover');
+});
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('hover'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('hover');
+  const files = e.dataTransfer.files;
+  if (files.length > 0) handleFile(files[0]);
+});
+
+fileInput.addEventListener('change', () => {
+  if (fileInput.files.length > 0) handleFile(fileInput.files[0]);
+});
+
+function handleFile(file) {
+  if (!file.type.startsWith('image/')) {
+    alert('Merci de déposer un fichier image valide.');
+    return;
+  }
+  uploadedImage = file;
+  dropzone.textContent = `Image sélectionnée : ${file.name}`;
+  generateBtn.disabled = !descInput.value.trim();
+  jsonPrompt.textContent = `{
+  "prompt": "",
+  "visual_style": "",
+  "product_name": "",
+  "mood": "",
+  "camera": "",
+  "music": ""
+}`;
+  copyBtn.disabled = true;
+}
+
+// --- Activation bouton si texte rempli ---
+descInput.addEventListener('input', () => {
+  generateBtn.disabled = !descInput.value.trim() || !uploadedImage;
+});
+
+// --- Fonction de génération du JSON ---
+function generateVeo3Prompt(description) {
+  return {
+    prompt: `A cinematic commercial video showcasing ${description}. The product is placed in a premium setting, bathed in natural soft light, with elegant shadows and smooth, slow camera movements. Focus on close-ups of details, textures, and any unique features. Emphasize a refined, modern, and desirable atmosphere. No models—just the product as the hero.`,
+    visual_style: "premium, minimalist, soft shadow, smooth motion",
+    product_name: description,
+    mood: "refined, modern, aspirational",
+    camera: "close-ups, gentle pans, slow-motion, depth of field",
+    music: "ambient, soft"
+  };
+}
+
+generateBtn.addEventListener('click', () => {
+  const desc = descInput.value.trim();
+  if (!uploadedImage) {
+    alert('Merci de déposer une photo de votre produit.');
+    return;
+  }
+  if (!desc) {
+    alert("Merci de décrire votre produit !");
+    return;
+  }
+  const jsonObj = generateVeo3Prompt(desc);
+  jsonPrompt.textContent = JSON.stringify(jsonObj, null, 2);
+  copyBtn.disabled = false;
+});
+
+// --- Copie du JSON ---
+copyBtn.addEventListener('click', () => {
+  // Sélection du contenu dans le <pre>
+  if (window.getSelection) {
+    const range = document.createRange();
+    range.selectNodeContents(jsonPrompt);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+  document.execCommand('copy');
+  window.getSelection().removeAllRanges();
+  alert('JSON copié dans le presse-papiers !');
+});
+</script>
+</body>
+</html>
