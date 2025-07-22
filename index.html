@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Générateur de Prompt Vidéo JSON - Veo 3</title>
+<title>Générateur JSON Vidéo "Effet Pop" Polyvalent (Kling AI)</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -13,7 +13,6 @@
     background: #f9f9f9;
     box-sizing: border-box;
   }
-
   .logo-container {
     text-align: center;
     margin-bottom: 20px;
@@ -145,59 +144,78 @@
   <img src="https://cdn.prod.website-files.com/62148d3ac62180149120a39c/624030bf8b99c52ab8a0f792_Test%20Utopia%20Studio.png" alt="Logo Utopia Studio" class="responsive-logo">
 </div>
 
-<h1>Générateur de Prompt Vidéo – JSON Veo 3 (fr)</h1>
+<h1>Générateur de Prompt Vidéo – Effet "Pop" Polyvalent (JSON Kling AI)</h1>
 
 <div id="dropzone">Déposez ici la photo de votre produit ou cliquez pour choisir</div>
 <input type="file" id="fileInput" accept="image/*" style="display:none" />
 
-<label for="descInput">Décrivez votre produit (ex : "mug blanc brillant avec anse dorée") :</label>
-<input type="text" id="descInput" placeholder="Décrivez le produit principal…" />
+<label for="descInput">Décrivez votre produit (ex : "bouteille métallique rouge mat, bouchon doré") :</label>
+<input type="text" id="descInput" placeholder="Décrivez le produit principal à mettre au centre…" />
 
 <div class="buttons-container">
   <button id="generatePrompt" disabled>Générer le prompt JSON</button>
   <button id="copyPrompt" disabled>Copier le JSON</button>
 </div>
 
-<div id="spinner">Prêt à générer votre JSON !</div>
-
 <pre id="jsonPrompt">{
-  "prompt": "",
-  "style_visuel": "",
-  "nom_produit": "",
-  "ambiance": "",
-  "camera": "",
-  "effets": "",
-  "ratio": "",
-  "resolution": ""
+  "version": "v1",
+  "aspect_ratio": "4:5",
+  "duration": 7,
+  "scenes": [
+    {
+      "description": "",
+      "visual_style": "",
+      "camera": {},
+      "lighting": {},
+      "animation": {},
+      "environment": {},
+      "product": {},
+      "audio": {}
+    }
+  ]
 }</pre>
 
 <div class="guide">
-  <strong>Comment utiliser ce prompt JSON dans Veo 3 ?</strong>
-  <p>1. Copiez tout le JSON ci-dessus.</p>
-  <p>2. Ouvrez Veo 3 et commencez un nouveau projet vidéo.</p>
-  <p>3. Importez la même photo que celle déposée ici.</p>
-  <p>4. Collez le JSON dans la section "texte/prompt" de Veo 3.</p>
-  <p>5. Lancez la génération vidéo et admirez le résultat 4:5 en HD !</p>
+  <strong>Tutoriel : Générer une vidéo avec Kling AI (gratuit)</strong>
+  <ol>
+    <li>
+      <b>Créer un compte :</b> Inscrivez-vous gratuitement sur <a href="https://klingai.com" target="_blank">klingai.com</a>. Kling AI offre actuellement 4 générations de vidéos gratuites.
+    </li>
+    <li>
+      <b>Ouvrez l'onglet "Image to Video" :</b> Après connexion, cliquez sur <b>Image to Video</b> dans le menu.
+    </li>
+    <li>
+      <b>Déposez votre image :</b> Importez la photo de votre produit utilisée ici.
+    </li>
+    <li>
+      <b>Copiez le champ <code>"description"</code> du JSON généré :</b> Collez-le dans le champ “Prompt” ou “Description” sur Kling AI. Inspirez-vous des autres champs pour ajuster si besoin.
+    </li>
+    <li>
+      <b>Lancez la génération :</b> Cliquez pour lancer la vidéo et patientez quelques minutes.
+    </li>
+    <li>
+      <b>Téléchargez le rendu :</b> Votre vidéo format 4:5 HD est prête à partager !
+    </li>
+  </ol>
+  <div style="margin-top:10px;color:#ba3d00;">
+    <strong>Astuce :</strong> Pour un résultat optimal, faites une description précise du produit, de ses couleurs et de ses détails visuels.
+  </div>
 </div>
+
 <div class="guide" style="margin-top:30px;">
-  <strong>🛠 Outils IA compatibles (photo ➔ vidéo, texte ➔ vidéo, etc.)</strong>
+  <strong>🛠 Autres IA compatibles (photo ➔ vidéo, texte ➔ vidéo, etc.)</strong>
   <ul>
     <li><b>Photo to Video :</b>
       <ul>
-        <li><b>Veo 3</b> (Google) – Génère des vidéos spectaculaires à partir d’image <u>et</u> prompt</li>
-        <li><b>Runway Gen-3</b> – Vidéo réaliste à partir d’une photo et d’un prompt</li>
-        <li><b>Pika Labs</b>, <b>Kaiber</b>, <b>PixVerse</b>, <b>Haiper</b>, <b>Deevid</b>…</li>
+        <li><b>Runway Gen-3</b>, <b>Pika Labs</b>, <b>Kaiber</b>, <b>PixVerse</b>, <b>Haiper</b>, <b>Deevid</b>…</li>
       </ul>
     </li>
     <li><b>Text to Video :</b>
       <ul>
-        <li><b>Sora (OpenAI)</b>, <b>Genmo</b>, <b>Luma Dream Machine</b>, <b>Pika Labs</b>, <b>Runway Gen-3</b></li>
+        <li><b>Sora (OpenAI)</b>, <b>Genmo</b>, <b>Luma Dream Machine</b>, <b>Runway Gen-3</b>…</li>
       </ul>
     </li>
   </ul>
-  <div style="margin-top:10px;color:#ba3d00;">
-    <strong>Important :</strong> Pour “photo + texte”, <u>importez la photo utilisée ici <strong>en même temps que le prompt</strong></u> pour un rendu fidèle !
-  </div>
 </div>
 
 <script>
@@ -205,13 +223,12 @@ const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('fileInput');
 const generateBtn = document.getElementById('generatePrompt');
 const copyBtn = document.getElementById('copyPrompt');
-const spinner = document.getElementById('spinner');
 const descInput = document.getElementById('descInput');
 const jsonPrompt = document.getElementById('jsonPrompt');
 
 let uploadedImage = null;
 
-// --- Dropzone ---
+// Dropzone logic
 dropzone.addEventListener('click', () => fileInput.click());
 
 dropzone.addEventListener('dragover', e => {
@@ -238,38 +255,90 @@ function handleFile(file) {
   uploadedImage = file;
   dropzone.textContent = `Image sélectionnée : ${file.name}`;
   generateBtn.disabled = !descInput.value.trim();
-  jsonPrompt.textContent = `{
-  "prompt": "",
-  "style_visuel": "",
-  "nom_produit": "",
-  "ambiance": "",
-  "camera": "",
-  "effets": "",
-  "ratio": "",
-  "resolution": ""
-}`;
+  setJsonDefault();
   copyBtn.disabled = true;
 }
 
-// --- Activation bouton si texte remplit ---
+// Activation bouton si texte rempli
 descInput.addEventListener('input', () => {
   generateBtn.disabled = !descInput.value.trim() || !uploadedImage;
 });
 
-// --- Génération du JSON raffiné et cinématique en français ---
-function generateVeo3PromptFR(description) {
+// Génération du JSON dynamique, épuré de tout élément spécifique valise
+function generateKlingPromptObjectFR(description) {
   return {
-    prompt: `Vidéo publicitaire hyper réaliste, montrant ${description} posé exactement au centre de l'image sur fond blanc pur. 
-L'objet tourne lentement sur lui-même à 360°, illuminé par une lumière douce et diffuse, avec un effet de fumée subtile et légèrement colorée à la teinte dominante du produit qui tourbillonne élégamment autour de lui. 
-La scène est en HD, cadrée verticalement au ratio 4:5, sans aucun décor ni élément parasite, pour sublimer le produit avec un effet premium, contemporain et magnétique.`,
-    style_visuel: "central, isolé, ultra-propre, minimaliste, fond blanc, rendu HD premium",
-    nom_produit: description,
-    ambiance: "raffinée, moderne, captivante, élégante",
-    camera: "rotation douce à 360°, focus constant sur le produit, léger zoom progressif, arrière-plan flouté blanc",
-    effets: "fumée vaporeuse colorée suivant la couleur principale du produit, reflets doux, lumière diffuse",
-    ratio: "4:5",
-    resolution: "HD"
+    "version": "v1",
+    "aspect_ratio": "4:5",
+    "duration": 7,
+    "scenes": [
+      {
+        "description": `A stylized product stands perfectly centered on a pure white background. It appears very small in the middle of the frame, then rapidly pops to its real size with a fun, elegant scale-up animation and a light 'ding' sound. The object remains vertically aligned and gently levitates, slowly rotating around its axis. A soft, diffused light sweeps across the surface left to right, creating luxury reflections and highlighting the key material and finish. The scene is hyper-realistic and modern, without any decor or distraction. Custom product details: ${description}`,
+        "visual_style": "hyper-realistic, ultra-clean, modern, elegant",
+        "camera": {
+          "angle": "frontal",
+          "movement": "static",
+          "position": "centered"
+        },
+        "lighting": {
+          "type": "soft diffused",
+          "motion": "left to right",
+          "effect": "luxury sweep reflection"
+        },
+        "animation": {
+          "entry": {
+            "type": "scale-up pop",
+            "from_scale": 0.1,
+            "to_scale": 1,
+            "timing": "0.3s",
+            "easing": "ease-out-back",
+            "sound": "ding"
+          },
+          "levitation": {
+            "enabled": true,
+            "movement": "subtle vertical float",
+            "amplitude": "small",
+            "speed": "slow"
+          },
+          "rotation": {
+            "axis": "Y",
+            "range": 10,
+            "speed": "slow"
+          }
+        },
+        "environment": {
+          "background": "pure white",
+          "ground_reflection": "none"
+        },
+        "product": {
+          "description": description
+        },
+        "audio": {
+          "effects": ["ding"],
+          "music": "none"
+        }
+      }
+    ]
   };
+}
+
+function setJsonDefault() {
+  jsonPrompt.textContent = `{
+  "version": "v1",
+  "aspect_ratio": "4:5",
+  "duration": 7,
+  "scenes": [
+    {
+      "description": "",
+      "visual_style": "",
+      "camera": {},
+      "lighting": {},
+      "animation": {},
+      "environment": {},
+      "product": {},
+      "audio": {}
+    }
+  ]
+}`;
 }
 
 generateBtn.addEventListener('click', () => {
@@ -282,12 +351,11 @@ generateBtn.addEventListener('click', () => {
     alert("Merci de décrire votre produit !");
     return;
   }
-  const jsonObj = generateVeo3PromptFR(desc);
+  const jsonObj = generateKlingPromptObjectFR(desc);
   jsonPrompt.textContent = JSON.stringify(jsonObj, null, 2);
   copyBtn.disabled = false;
 });
 
-// --- Copie du JSON ---
 copyBtn.addEventListener('click', () => {
   if (!jsonPrompt.textContent) return;
   if (window.getSelection) {
